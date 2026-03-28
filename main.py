@@ -35,18 +35,7 @@ def load_model():
         nn.Linear(512, 4)
     )
 
-    # model.load_state_dict(torch.load("resnet50_maize_model.pth", map_location=device))
-    # model.load_state_dict(torch.load("resnet50_maize_model.pth", map_location=device, weights_only=False))
     state_dict = torch.load("resnet50_maize_model.pth", map_location=device)
-    print("############")
-    print("############")
-    print("############")
-
-    print(type(state_dict))   
-    print("############")
-    print("############")
-    print("############")
-
 
     model.load_state_dict(state_dict)
     model.to(device)
