@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maize Disease Classifier</title>
+</head>
+<body>
+
+    <h2>Upload Maize Leaf Image</h2>
+
+    <form id="uploadForm">
+        <input type="file" id="fileInput" required />
+        <button type="submit">Predict</button>
+    </form>
+
+    <h3 id="result"></h3>
+
+    <script>
+        const form = document.getElementById("uploadForm");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const fileInput = document.getElementById("fileInput");
+            const file = fileInput.files[0];
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const response = await fetch("/predict", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            document.getElementById("result").innerText =
+                "Prediction: " + data.prediction;
+        });
+    </script>
+
+</body>
+</html>
